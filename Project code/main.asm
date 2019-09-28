@@ -94,7 +94,7 @@ gameMode:
 	ldi r27,0
 	out portc,r27
 	out portb,r28
-jmp wait
+jmp start
 
 getRegion:
 	ldi r16, 0b00010000
@@ -138,7 +138,7 @@ dis:
 	out portc,r27
 	out portb, r21
 
-jmp wait
+jmp start
 
 
 
