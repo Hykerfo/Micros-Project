@@ -32,8 +32,16 @@ start:
 	ldi r24,0x02
 	ldi r27, 1
 	ldi r28,9
+wait:
+	in r30,pind
+	ldi r16,0b01000000
+	and r30,r16
+	cpi r30,0b01000000
+	breq pickMode
+jmp wait
 
 pickMode:
+	clr r16
 	in r16,pind
 	ldi r22,0b00100000
 	and r16,r22
@@ -44,38 +52,7 @@ pickMode:
 jmp pickMode
 
 
-;main code has ended
 
-counting:
-	inc r18
-reti
-
-pulseInp:
-	cpi r26, 0
-	brne valueObtained
-	call setr26
-reti
-
-display:
-	inc r19
-	clr r22
-		loop:
-		inc r22
-		clr r23
-			loop1:
-			inc r23
-			cpi r23,100
-			brne loop1
-		cpi r22,100
-		brne loop
-	cpi r19,200
-brne display
-ret
-
-setr26:
-	clr r18
-	ldi r26, 1
-ret
 
 ten:
 	ldi r21,0x10
@@ -96,12 +73,28 @@ fift:
 	ldi r21,0x15
 jmp dis
 
+display:
+	inc r19
+	clr r22
+		loop:
+		inc r22
+		clr r23
+			loop1:
+			inc r23
+			cpi r23,100
+			brne loop1
+		cpi r22,100
+		brne loop
+	cpi r19,200
+brne display
+ret
+
 
 gameMode:
 	ldi r27,0
 	out portc,r27
 	out portb,r28
-jmp pickMode
+jmp wait
 
 getRegion:
 	ldi r16, 0b00010000
@@ -127,7 +120,7 @@ valueObtained:
 	dec r18
 	mov r21, r18
 
-;The following code hard codes for numbers 10-15
+		;The following code hard codes for numbers 10-15
 	cpi r21,0x0a
 breq ten
 	cpi r21, 0x0b
@@ -145,4 +138,23 @@ dis:
 	out portc,r27
 	out portb, r21
 
-jmp pickMode
+jmp wait
+
+
+
+
+
+counting:
+	inc r18
+reti
+
+pulseInp:
+	cpi r26, 0
+	brne valueObtained
+	call setr26
+reti
+
+setr26:
+	clr r18
+	ldi r26, 1
+ret

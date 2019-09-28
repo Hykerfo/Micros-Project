@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Sat Sep 28 16:18:04 2019
+AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Sat Sep 28 16:57:53 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -696,21 +696,22 @@ EQU  TWIaddr      00000030
 EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
 CSEG start        00000022
-CSEG pulseInp     00000040
-CSEG counting     0000003e
-CSEG pickMode     00000035
-CSEG getRegion    0000006b
-CSEG gameMode     00000066
-CSEG valueObtained 0000007a
-CSEG setr26       00000051
-CSEG display      00000045
-CSEG loop         00000047
-CSEG loop1        00000049
-CSEG ten          00000054
-CSEG dis          0000008a
-CSEG elev         00000057
-CSEG twelve       0000005a
-CSEG thirt        0000005d
-CSEG fourt        00000060
-CSEG fift         00000063
-CSEG timeLoop     00000077
+CSEG pulseInp     0000008e
+CSEG counting     0000008c
+CSEG wait         00000035
+CSEG pickMode     0000003c
+CSEG getRegion    00000069
+CSEG gameMode     00000064
+CSEG ten          00000046
+CSEG dis          00000088
+CSEG elev         00000049
+CSEG twelve       0000004c
+CSEG thirt        0000004f
+CSEG fourt        00000052
+CSEG fift         00000055
+CSEG display      00000058
+CSEG loop         0000005a
+CSEG loop1        0000005c
+CSEG timeLoop     00000075
+CSEG valueObtained 00000078
+CSEG setr26       00000093
