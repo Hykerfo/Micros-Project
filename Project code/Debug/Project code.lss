@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Sat Sep 28 17:06:29 2019
+AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Sun Sep 29 11:14:38 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m328pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m328pdef.inc'
@@ -994,9 +994,9 @@ AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\P
                                  .org 0x0000
 000000 940c 0022                 	jmp start
                                  .org 0x0002
-000002 940c 008e                 	jmp pulseInp
+000002 940c 0074                 	jmp pulseInp
                                  .org 0x0020
-000020 940c 008c                 	jmp counting
+000020 940c 0072                 	jmp counting
                                  
                                  start:
                                  
@@ -1018,131 +1018,131 @@ AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\P
 000032 e082                      	ldi r24,0x02
 000033 e0b1                      	ldi r27, 1
 000034 e0c9                      	ldi r28,9
-                                 wait:
-000035 b1e9                      	in r30,pind
-000036 e400                      	ldi r16,0b01000000
-000037 23e0                      	and r30,r16
-000038 34e0                      	cpi r30,0b01000000
-000039 f011                      	breq pickMode
-00003a 940c 0035                 jmp wait
                                  
                                  pickMode:
-00003c 2700                      	clr r16
-00003d b109                      	in r16,pind
-00003e e260                      	ldi r22,0b00100000
-00003f 2306                      	and r16,r22
-000040 3200                      	cpi r16,32
-000041 f139                      	breq getRegion
-000042 3200                      	cpi r16,32
-000043 f501                      	brne gameMode
-000044 940c 003c                 jmp pickMode
-                                 
-                                 
-                                 
-                                 
-                                 ten:
-000046 e150                      	ldi r21,0x10
-000047 940c 0088                 jmp dis
-                                 elev:
-000049 e151                      	ldi r21,0x11
-00004a 940c 0088                 jmp dis
-                                 twelve:
-00004c e152                      	ldi r21,0x12
-00004d 940c 0088                 jmp dis
-                                 thirt:
-00004f e153                      	ldi r21,0x13
-000050 940c 0088                 jmp dis
-                                 fourt:
-000052 e154                      	ldi r21,0x14
-000053 940c 0088                 jmp dis
-                                 fift:
-000055 e155                      	ldi r21,0x15
-000056 940c 0088                 jmp dis
+                                 	;clr r16
+000035 b109                      	in r16,pind
+000036 fd05                      	sbrc r16,5
+000037 940c 004e                 	jmp getRegion
+000039 940c 0049                 	jmp gameMode
+00003b 940c 0035                 jmp pickMode
                                  
                                  display:
-000058 9533                      	inc r19
-000059 2766                      	clr r22
+                                 loop0:
+00003d 9533                      	inc r19
+00003e 2766                      	clr r22
                                  		loop:
-00005a 9563                      		inc r22
-00005b 2777                      		clr r23
+00003f 9563                      		inc r22
+000040 2777                      		clr r23
                                  			loop1:
-00005c 9573                      			inc r23
-00005d 3674                      			cpi r23,100
-00005e f7e9                      			brne loop1
-00005f 3664                      		cpi r22,100
-000060 f7c9                      		brne loop
-000061 3c38                      	cpi r19,200
-000062 f7a9                      brne display
-000063 9508                      ret
-                                 
+000041 9573                      			inc r23
+000042 3674                      			cpi r23,100
+000043 f7e9                      			brne loop1
+000044 3664                      		cpi r22,100
+000045 f7c9                      		brne loop
+000046 3c38                      	cpi r19,200
+000047 f7a9                      brne loop0
+000048 9508                      ret
                                  
                                  gameMode:
-000064 e0b0                      	ldi r27,0
-000065 b9b8                      	out portc,r27
-000066 b9c5                      	out portb,r28
-000067 940c 0022                 jmp start
+                                 ;wait:
+                                 ;	in r30,pind
+                                 ;	sbrc r30, 6
+                                 ;	jmp comm
+                                 ;jmp wait
+                                 
+                                 comm:
+000049 e0b1                      	ldi r27,1
+00004a b9b8                      	out portc,r27
+00004b b9c5                      	out portb,r28
+00004c 940c 0035                 jmp pickMode
                                  
                                  getRegion:
-000069 e100                      	ldi r16, 0b00010000
-00006a e061                      	ldi r22,1
-00006b 2711                      	clr r17
-00006c 2755                      	clr r21
-00006d e091                      	ldi r25, 1
-00006e 27aa                      	clr r26
                                  
-00006f 2733                      	clr r19
-000070 b90b                      	out portd, r16
-000071 940e 0058                 	call display
-000073 b95b                      	out portd, r21
-000074 9478                      sei
+                                 ;wat:
+                                 ;	in r30,pind
+                                 ;	sbrc r30 ,6
+                                 ;	jmp commence
+                                 ;jmp wat
+                                 
+                                 commence:
+00004e e100                      	ldi r16, 0b00010000
+00004f e061                      	ldi r22,1
+000050 2711                      	clr r17
+000051 2755                      	clr r21
+000052 e091                      	ldi r25, 1
+000053 27aa                      	clr r26
+                                 
+000054 2733                      	clr r19
+000055 b90b                      	out portd, r16
+000056 940e 003d                 	call display
+000058 b95b                      	out portd, r21
+000059 9478                      sei
                                  
                                  timeLoop:
-000075 0000                      	nop
-000076 940c 0075                 	jmp timeLoop
+00005a 0000                      	nop
+00005b 940c 005a                 	jmp timeLoop
                                  
                                  valueObtained:
-000078 94f8                      	cli	
-000079 9526                      	lsr r18
-00007a 952a                      	dec r18
-00007b 2f52                      	mov r21, r18
+00005d 94f8                      	cli	
+00005e 2755                      	clr r21
+00005f 9526                      	lsr r18
+000060 952a                      	dec r18
+000061 2f52                      	mov r21, r18
                                  
                                  		;The following code hard codes for numbers 10-15
-00007c 305a                      	cpi r21,0x0a
-00007d f241                      breq ten
-00007e 305b                      	cpi r21, 0x0b
-00007f f249                      breq elev
-000080 305c                      	cpi r21, 0x0c
-000081 f251                      breq twelve
-000082 305d                      	cpi r21, 0x0d
-000083 f259                      breq thirt
-000084 305e                      	cpi r21,0x0e
-000085 f261                      breq fourt
-000086 305f                      	cpi r21,0x0f
-000087 f269                      breq fift
+000062 305a                      	cpi r21,0x0a
+000063 f0c1                      breq ten
+000064 305b                      	cpi r21, 0x0b
+000065 f0c9                      breq elev
+000066 305c                      	cpi r21, 0x0c
+000067 f0d1                      breq twelve
+000068 305d                      	cpi r21, 0x0d
+000069 f0d9                      breq thirt
+00006a 305e                      	cpi r21,0x0e
+00006b f0e1                      breq fourt
+00006c 305f                      	cpi r21,0x0f
+00006d f0e9                      breq fift
                                  
                                  dis:
-000088 b9b8                      	out portc,r27
-000089 b955                      	out portb, r21
-                                 
-00008a 940c 0022                 jmp start
-                                 
-                                 
-                                 
+00006e b9b8                      	out portc,r27
+00006f b955                      	out portb, r21
+000070 940c 0035                 jmp pickMode
                                  
                                  
                                  counting:
-00008c 9523                      	inc r18
-00008d 9518                      reti
+000072 9523                      	inc r18
+000073 9518                      reti
                                  
                                  pulseInp:
-00008e 30a0                      	cpi r26, 0
-00008f f741                      	brne valueObtained
-000090 940e 0093                 	call setr26
-000092 9518                      reti
+000074 30a0                      	cpi r26, 0
+000075 f739                      	brne valueObtained
+000076 940e 0079                 	call setr26
+000078 9518                      reti
                                  
                                  setr26:
-000093 2722                      	clr r18
-000094 e0a1                      	ldi r26, 1
+000079 2722                      	clr r18
+00007a e0a1                      	ldi r26, 1
+00007b 9508                      ret
+                                 
+                                 ten:
+00007c e150                      	ldi r21,0x10
+00007d 940c 006e                 jmp dis
+                                 elev:
+00007f e151                      	ldi r21,0x11
+000080 940c 006e                 jmp dis
+                                 twelve:
+000082 e152                      	ldi r21,0x12
+000083 940c 006e                 jmp dis
+                                 thirt:
+000085 e153                      	ldi r21,0x13
+000086 940c 006e                 jmp dis
+                                 fourt:
+000088 e154                      	ldi r21,0x14
+000089 940c 006e                 jmp dis
+                                 fift:
+00008b e155                      	ldi r21,0x15
+00008c 940c 006e                 jmp dis
 
 
 RESOURCE USE INFORMATION
@@ -1162,28 +1162,28 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  23 r17:   1 r18:   5 r19:   3 r20:   0 
-r21:  16 r22:   6 r23:   3 r24:   1 r25:   1 r26:   3 r27:   4 r28:   2 
-r29:   0 r30:   3 r31:   0 
-Registers used: 13 out of 35 (37.1%)
+r13:   0 r14:   0 r15:   0 r16:  18 r17:   1 r18:   5 r19:   3 r20:   0 
+r21:  17 r22:   4 r23:   3 r24:   1 r25:   1 r26:   3 r27:   4 r28:   2 
+r29:   0 r30:   0 r31:   0 
+Registers used: 12 out of 35 (34.3%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   2 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   8 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   6 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   5 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brne  :   4 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   2 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :   9 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :  13 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   4 jmp   :  14 
-ld    :   0 ldd   :   0 ldi   :  21 lds   :   0 lpm   :   0 lsl   :   0 
+cpi   :  10 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   4 jmp   :  15 
+ld    :   0 ldd   :   0 ldi   :  19 lds   :   0 lpm   :   0 lsl   :   0 
 lsr   :   1 mov   :   1 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   1 or    :   0 ori   :   0 out   :  12 pop   :   0 
 push  :   0 rcall :   0 ret   :   2 reti  :   2 rjmp  :   0 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
-sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
+sbiw  :   0 sbr   :   0 sbrc  :   1 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   2 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
@@ -1192,7 +1192,7 @@ Instructions used: 20 out of 113 (17.7%)
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00012c    244      0    244   32768   0.7%
+[.cseg] 0x000000 0x00011c    228      0    228   32768   0.7%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

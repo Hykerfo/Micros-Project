@@ -32,48 +32,17 @@ start:
 	ldi r24,0x02
 	ldi r27, 1
 	ldi r28,9
-wait:
-	in r30,pind
-	ldi r16,0b01000000
-	and r30,r16
-	cpi r30,0b01000000
-	breq pickMode
-jmp wait
 
 pickMode:
-	clr r16
+	;clr r16
 	in r16,pind
-	ldi r22,0b00100000
-	and r16,r22
-	cpi r16,32
-	breq getRegion
-	cpi r16,32
-	brne gameMode
+	sbrc r16,5
+	jmp getRegion
+	jmp gameMode
 jmp pickMode
 
-
-
-
-ten:
-	ldi r21,0x10
-jmp dis
-elev:
-	ldi r21,0x11
-jmp dis
-twelve:
-	ldi r21,0x12
-jmp dis
-thirt:
-	ldi r21,0x13
-jmp dis
-fourt:
-	ldi r21,0x14
-jmp dis
-fift:
-	ldi r21,0x15
-jmp dis
-
 display:
+loop0:
 	inc r19
 	clr r22
 		loop:
@@ -86,17 +55,31 @@ display:
 		cpi r22,100
 		brne loop
 	cpi r19,200
-brne display
+brne loop0
 ret
 
-
 gameMode:
-	ldi r27,0
+;wait:
+;	in r30,pind
+;	sbrc r30, 6
+;	jmp comm
+;jmp wait
+
+comm:
+	ldi r27,1
 	out portc,r27
 	out portb,r28
-jmp start
+jmp pickMode
 
 getRegion:
+
+;wat:
+;	in r30,pind
+;	sbrc r30 ,6
+;	jmp commence
+;jmp wat
+
+commence:
 	ldi r16, 0b00010000
 	ldi r22,1
 	clr r17
@@ -116,6 +99,7 @@ timeLoop:
 
 valueObtained:
 	cli	
+	clr r21
 	lsr r18
 	dec r18
 	mov r21, r18
@@ -137,11 +121,7 @@ breq fift
 dis:
 	out portc,r27
 	out portb, r21
-
-jmp start
-
-
-
+jmp pickMode
 
 
 counting:
@@ -158,3 +138,22 @@ setr26:
 	clr r18
 	ldi r26, 1
 ret
+
+ten:
+	ldi r21,0x10
+jmp dis
+elev:
+	ldi r21,0x11
+jmp dis
+twelve:
+	ldi r21,0x12
+jmp dis
+thirt:
+	ldi r21,0x13
+jmp dis
+fourt:
+	ldi r21,0x14
+jmp dis
+fift:
+	ldi r21,0x15
+jmp dis
