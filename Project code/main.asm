@@ -29,9 +29,6 @@ start:
 	out ddrd, r16
 	ldi r16,0b00000111
 	out ddrc,r16
-	ldi r24,0x02
-	ldi r27, 1
-	ldi r28,9
 
 pickMode:
 	;clr r16
@@ -60,57 +57,10 @@ loop0:
 brne loop0
 ret
 
-
-
-gameMode:
-wait:
-	in r30,pinc
-	sbrc r30, 3
-	jmp comm
-jmp wait
-
-comm:
-inc r21
-	sei
-	in r16,tcnt0
-	ldi r17,0b00001111
-	and r16,r17
-	
-
-cpi r16,0x0a
-	breq ten1
-cpi r16, 0x0b
-	breq elev1
-cpi r16, 0x0c
-	breq twelve1
-cpi r16, 0x0d
-	breq thirt1
-cpi r16,0x0e
-	breq fourt1
-cpi r16,0x0f
-	breq fift1
-
-here:
-clr r20
-cli
-lerp:
-	inc r20
-	out portb,r16
-	ldi r19,19
-	call display
-	cpi r20,4
-brne  lerp
-	
-cpi r21,6
-brne comm
-call diScore
-jmp pickMode
-
-
 diScore:
 	ldi r29,0b00011001
 	out portb,r29
-ret
+jmp pickMode
 
 ten1:
 	ldi r16,0x10
@@ -132,28 +82,83 @@ fift1:
 jmp here
 
 
+gameMode:
+wait:
+	in r30,pinc
+	sbrc r30, 3
+	jmp comm
+jmp wait
 
+comm:
+	ldi r24,5
+	ldi r25,0b00000001
+	ldi r27,0b00000100
+;	sei
+	in r16,tcnt0
+	ldi r17,0b00001111
+	and r16,r17
+	
+cpi r16,0x0a
+	breq ten1
+cpi r16, 0x0b
+	breq elev1
+cpi r16, 0x0c
+	breq twelve1
+cpi r16, 0x0d
+	breq thirt1
+cpi r16,0x0e
+	breq fourt1
+cpi r16,0x0f
+	breq fift1
 
+here:
+ldi r16,2
+;clr r20
+;cli
 
+	;inc r20
+	out portb,r16
+	ldi r19,19
+	call display
+	;cpi r20,4
+
+	;cpi r24,5
+	jmp flerp;this is done to obtain a region
+
+valObt:
+cpse r21,r16
+	jmp tryAgainBub
+	jmp youGotIt
+
+jmp pickMode
+
+youGotIt:
+	out portc,r25
+jmp diScore
+
+tryAgainBub:
+	out portc,r27
+jmp diScore
 
 getRegion:
 
-;wat:
-;	in r31,pinc
-;	sbrc r31 ,3
-;	jmp commence
-;jmp wat
+wat:
+	in r31,pinc
+	sbrc r31 ,3
+	jmp commence
+jmp wat
 
 commence:
-	ldi r16, 0b00010000
+	clr r24
+flerp:
+	ldi r28, 0b00010000
 	ldi r22,1
 	clr r17
 	clr r21
-	ldi r25, 1
 	clr r26
 
 	clr r19
-	out portd, r16
+	out portd, r28
 	call display
 	out portd, r21
 sei
@@ -168,7 +173,8 @@ valueObtained:
 	lsr r18
 	dec r18
 	mov r21, r18
-
+	cpi r24,5
+	breq valObt
 		;The following code hard codes for numbers 10-15
 	cpi r21,0x0a
 breq ten
@@ -184,7 +190,10 @@ breq fourt
 breq fift
 
 dis:
-	out portc,r27
+	cpi r24,5
+	breq valObt
+	clr r19
+	out portc,r19
 	out portb, r21
 jmp pickMode
 
