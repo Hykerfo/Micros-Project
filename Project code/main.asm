@@ -36,10 +36,12 @@ start:
 pickMode:
 	;clr r16
 	in r16,pind
+	clr r21
 	sbrc r16,5
 	jmp getRegion
 	jmp gameMode
 jmp pickMode
+
 
 display:
 loop0:
@@ -58,24 +60,87 @@ loop0:
 brne loop0
 ret
 
+
+
 gameMode:
-;wait:
-;	in r30,pind
-;	sbrc r30, 6
-;	jmp comm
-;jmp wait
+wait:
+	in r30,pinc
+	sbrc r30, 3
+	jmp comm
+jmp wait
 
 comm:
-	ldi r27,1
-	out portc,r27
-	out portb,r28
+inc r21
+	sei
+	in r16,tcnt0
+	ldi r17,0b00001111
+	and r16,r17
+	
+
+cpi r16,0x0a
+	breq ten1
+cpi r16, 0x0b
+	breq elev1
+cpi r16, 0x0c
+	breq twelve1
+cpi r16, 0x0d
+	breq thirt1
+cpi r16,0x0e
+	breq fourt1
+cpi r16,0x0f
+	breq fift1
+
+here:
+clr r20
+cli
+lerp:
+	inc r20
+	out portb,r16
+	ldi r19,19
+	call display
+	cpi r20,4
+brne  lerp
+	
+cpi r21,6
+brne comm
+call diScore
 jmp pickMode
+
+
+diScore:
+	ldi r29,0b00011001
+	out portb,r29
+ret
+
+ten1:
+	ldi r16,0x10
+jmp here
+elev1:
+	ldi r16,0x11
+jmp here
+twelve1:
+	ldi r16,0x12
+jmp here
+thirt1:
+	ldi r16,0x13
+jmp here
+fourt1:
+	ldi r16,0x14
+jmp here
+fift1:
+	ldi r16,0x15
+jmp here
+
+
+
+
+
 
 getRegion:
 
 ;wat:
-;	in r30,pind
-;	sbrc r30 ,6
+;	in r31,pinc
+;	sbrc r31 ,3
 ;	jmp commence
 ;jmp wat
 
