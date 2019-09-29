@@ -23,10 +23,10 @@
  </OUTPUT_FILES>
  <LABELS>
   <start><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>15</LINE></start>
-  <pulseInp><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>205</LINE></pulseInp>
-  <counting><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>201</LINE></counting>
+  <pulseInp><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>211</LINE></pulseInp>
+  <counting><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>207</LINE></counting>
   <pickMode><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>33</LINE></pickMode>
-  <getRegion><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>143</LINE></getRegion>
+  <getRegion><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>149</LINE></getRegion>
   <gameMode><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>85</LINE></gameMode>
   <display><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>43</LINE></display>
   <loop0><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>44</LINE></loop0>
@@ -42,21 +42,21 @@
   <fift1><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>80</LINE></fift1>
   <wait><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>86</LINE></wait>
   <comm><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>92</LINE></comm>
-  <flerp><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>153</LINE></flerp>
+  <flerp><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>159</LINE></flerp>
   <valObt><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>128</LINE></valObt>
   <tryAgainBub><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>139</LINE></tryAgainBub>
   <youGotIt><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>135</LINE></youGotIt>
-  <wat><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>145</LINE></wat>
-  <commence><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>151</LINE></commence>
-  <timeLoop><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>166</LINE></timeLoop>
-  <valueObtained><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>170</LINE></valueObtained>
-  <ten><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>216</LINE></ten>
-  <elev><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>219</LINE></elev>
-  <twelve><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>222</LINE></twelve>
-  <thirt><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>225</LINE></thirt>
-  <fourt><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>228</LINE></fourt>
-  <fift><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>231</LINE></fift>
-  <dis><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>192</LINE></dis>
-  <setr26><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>211</LINE></setr26>
+  <wat><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>151</LINE></wat>
+  <commence><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>157</LINE></commence>
+  <timeLoop><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>172</LINE></timeLoop>
+  <valueObtained><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>176</LINE></valueObtained>
+  <ten><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>222</LINE></ten>
+  <elev><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>225</LINE></elev>
+  <twelve><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>228</LINE></twelve>
+  <thirt><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>231</LINE></thirt>
+  <fourt><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>234</LINE></fourt>
+  <fift><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>237</LINE></fift>
+  <dis><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>200</LINE></dis>
+  <setr26><FILE>C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm</FILE><LINE>217</LINE></setr26>
  </LABELS>
 </ASSEMBLER_INFO>

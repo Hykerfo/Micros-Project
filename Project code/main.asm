@@ -137,7 +137,13 @@ youGotIt:
 jmp diScore
 
 tryAgainBub:
+	ldi r17,2
+	ldi r31,15
 	out portc,r27
+	cpse r21,r31
+	mov r17,r27
+	out portc,r17
+
 jmp diScore
 
 getRegion:
@@ -173,8 +179,10 @@ valueObtained:
 	lsr r18
 	dec r18
 	mov r21, r18
+
 	cpi r24,5
 	breq valObt
+
 		;The following code hard codes for numbers 10-15
 	cpi r21,0x0a
 breq ten
@@ -190,8 +198,6 @@ breq fourt
 breq fift
 
 dis:
-	cpi r24,5
-	breq valObt
 	clr r19
 	out portc,r19
 	out portb, r21
