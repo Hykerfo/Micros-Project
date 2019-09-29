@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Sun Sep 29 20:32:57 2019
+AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Mon Sep 30 00:32:41 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m328pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m328pdef.inc'
@@ -994,9 +994,9 @@ AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\P
                                  .org 0x0000
 000000 940c 0022                 	jmp start
                                  .org 0x0002
-000002 940c 00bd                 	jmp pulseInp
+000002 940c 00f1                 	jmp pulseInp
                                  .org 0x0020
-000020 940c 00bb                 	jmp counting
+000020 940c 00ef                 	jmp counting
                                  
                                  start:
                                  
@@ -1016,213 +1016,261 @@ AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\P
 000030 e007                      	ldi r16,0b00000111
 000031 b907                      	out ddrc,r16
                                  
-                                 pickMode:
-                                 	;clr r16
+                                 pickMode:;In this mode the slide switch regulates what mode the program is in
 000032 b109                      	in r16,pind
 000033 2755                      	clr r21
-000034 fd05                      	sbrc r16,5
-000035 940c 008e                 	jmp getRegion
-000037 940c 005d                 	jmp gameMode
-000039 940c 0032                 jmp pickMode
+000034 27dd                      	clr r29
+000035 fd05                      	sbrc r16,5
+000036 940c 00c2                 	jmp getRegion
+000038 940c 0076                 	jmp gameMode
+00003a 940c 0032                 jmp pickMode
                                  
                                  
                                  display:
                                  loop0:
-00003b 9533                      	inc r19
-00003c 2766                      	clr r22
+00003c 9533                      	inc r19
+00003d 2766                      	clr r22
                                  		loop:
-00003d 9563                      		inc r22
-00003e 2777                      		clr r23
+00003e 9563                      		inc r22
+00003f 2777                      		clr r23
                                  			loop1:
-00003f 9573                      			inc r23
-000040 3674                      			cpi r23,100
-000041 f7e9                      			brne loop1
-000042 3664                      		cpi r22,100
-000043 f7c9                      		brne loop
-000044 3c38                      	cpi r19,200
-000045 f7a9                      brne loop0
-000046 9508                      ret
+000040 9573                      			inc r23
+000041 3674                      			cpi r23,100
+000042 f7e9                      			brne loop1
+000043 3664                      		cpi r22,100
+000044 f7c9                      		brne loop
+000045 3c38                      	cpi r19,200
+000046 f7a9                      brne loop0
+000047 9508                      ret
+                                 
+                                 ten2:
+000048 e1d0                      	ldi r29,0x10
+000049 940c 005c                 jmp backAgain
+                                 elev2:
+00004b e1d1                      	ldi r29,0x11
+00004c 940c 005c                 jmp backAgain
+                                 twelve2:
+00004e e1d2                      	ldi r29,0x12
+00004f 940c 005c                 jmp backAgain
                                  
                                  diScore:
-000047 e1d9                      	ldi r29,0b00011001
-000048 b9d5                      	out portb,r29
-000049 940c 0032                 jmp pickMode
+000051 30d0                      	cpi r29,0
+000052 f064                      	brlt negative
+000053 30d0                      	cpi r29,0
+000054 f404                      	brge positive
+                                 positive:
+000055 b998                      	out portc,r25
+                                 
+000056 30da                      	cpi r29,0x0a
+000057 f381                      	breq ten2
+000058 30db                      	cpi r29,0x0b
+000059 f389                      	breq elev2
+00005a 30dc                      	cpi r29,0x0c
+00005b f391                      	breq twelve2
+                                 
+                                 	backAgain:
+00005c b9d5                      	out portb,r29
+00005d 940c 0032                 jmp pickMode
+                                 negative: 
+00005f b9b8                      	out portc,r27
+000060 95d1                      	neg r29
+000061 b9d5                      	out portb,r29
+000062 940c 0032                 jmp pickMode
                                  
                                  ten1:
-00004b e100                      	ldi r16,0x10
-00004c 940c 0075                 jmp here
+000064 e100                      	ldi r16,0x10
+000065 940c 0096                 jmp here
                                  elev1:
-00004e e101                      	ldi r16,0x11
-00004f 940c 0075                 jmp here
+000067 e101                      	ldi r16,0x11
+000068 940c 0096                 jmp here
                                  twelve1:
-000051 e102                      	ldi r16,0x12
-000052 940c 0075                 jmp here
+00006a e102                      	ldi r16,0x12
+00006b 940c 0096                 jmp here
                                  thirt1:
-000054 e103                      	ldi r16,0x13
-000055 940c 0075                 jmp here
+00006d e103                      	ldi r16,0x13
+00006e 940c 0096                 jmp here
                                  fourt1:
-000057 e104                      	ldi r16,0x14
-000058 940c 0075                 jmp here
+000070 e104                      	ldi r16,0x14
+000071 940c 0096                 jmp here
                                  fift1:
-00005a e105                      	ldi r16,0x15
-00005b 940c 0075                 jmp here
+000073 e105                      	ldi r16,0x15
+000074 940c 0096                 jmp here
                                  
                                  
                                  gameMode:
                                  wait:
-00005d b1e6                      	in r30,pinc
-00005e fde3                      	sbrc r30, 3
-00005f 940c 0063                 	jmp comm
-000061 940c 005d                 jmp wait
+000076 b109                      	in r16,pind
+000077 fd05                      	sbrc r16,5
+000078 940c 0032                 	jmp pickMode
+00007a b1e6                      	in r30,pinc
+00007b fde3                      	sbrc r30, 3
+00007c 940c 0080                 	jmp comm
+00007e 940c 0076                 jmp wait
                                  
                                  comm:
-000063 e085                      	ldi r24,5
-000064 e091                      	ldi r25,0b00000001
-000065 e0b4                      	ldi r27,0b00000100
+000080 27ee                      clr r30
+                                 flip:
+000081 95e3                      	inc r30
+000082 e085                      	ldi r24,5
+000083 e091                      	ldi r25,0b00000001
+000084 e0b4                      	ldi r27,0b00000100
                                  ;	sei
-000066 b506                      	in r16,tcnt0
-000067 e01f                      	ldi r17,0b00001111
-000068 2301                      	and r16,r17
-                                 	
-000069 300a                      cpi r16,0x0a
-00006a f301                      	breq ten1
-00006b 300b                      cpi r16, 0x0b
-00006c f309                      	breq elev1
-00006d 300c                      cpi r16, 0x0c
-00006e f311                      	breq twelve1
-00006f 300d                      cpi r16, 0x0d
-000070 f319                      	breq thirt1
-000071 300e                      cpi r16,0x0e
-000072 f321                      	breq fourt1
-000073 300f                      cpi r16,0x0f
-000074 f329                      	breq fift1
+000085 b506                      	in r16,tcnt0
+000086 e01f                      	ldi r17,0b00001111
+000087 2301                      	and r16,r17
+000088 950a                      	dec r16
+000089 2ff0                      	mov r31,r16
+                                 
+00008a 300a                      cpi r16,0x0a
+00008b f2c1                      	breq ten1
+00008c 300b                      cpi r16, 0x0b
+00008d f2c9                      	breq elev1
+00008e 300c                      cpi r16, 0x0c
+00008f f2d1                      	breq twelve1
+000090 300d                      cpi r16, 0x0d
+000091 f2d9                      	breq thirt1
+000092 300e                      cpi r16,0x0e
+000093 f2e1                      	breq fourt1
+000094 300f                      cpi r16,0x0f
+000095 f2e9                      	breq fift1
                                  
                                  here:
-000075 e002                      ldi r16,2
-                                 ;clr r20
-                                 ;cli
-                                 
-                                 	;inc r20
-000076 b905                      	out portb,r16
-000077 e133                      	ldi r19,19
-000078 940e 003b                 	call display
-                                 	;cpi r20,4
-                                 
-                                 	;cpi r24,5
-00007a 940c 0095                 	jmp flerp;this is done to obtain a region
+000096 2744                      clr r20
+                                 lerp:
+000097 9543                      	inc r20
+000098 b905                      	out portb,r16
+000099 e133                      	ldi r19,19
+00009a 940e 003c                 	call display
+00009c 304a                      	cpi r20,10
+00009d f7c9                      brne lerp
+00009e 940c 00c9                 	jmp flerp;this is done to obtain a region
                                  
                                  valObt:
-00007c 1350                      cpse r21,r16
-00007d 940c 0086                 	jmp tryAgainBub
-00007f 940c 0083                 	jmp youGotIt
+0000a0 135f                      cpse r21,r31
+0000a1 940c 00b7                 	jmp tryAgainBub
+0000a3 940c 00b2                 	jmp youGotIt
                                  
-000081 940c 0032                 jmp pickMode
+                                 hereWeGoAgain:
+0000a5 30e6                      	cpi r30,6
+0000a6 f6d1                      	brne flip;this loops the code 6 times
+0000a7 940e 003c                 	call display
+0000a9 27ff                      	clr r31
+0000aa b9f8                      	out portc,r31
+0000ab e332                      	ldi r19,50
+0000ac 940e 003c                 	call display
+0000ae 940c 0051                 	jmp diScore
+0000b0 940c 0032                 jmp pickMode
                                  
                                  youGotIt:
-000083 b998                      	out portc,r25
-000084 940c 0047                 jmp diScore
+0000b2 e012                      	ldi r17,2
+0000b3 b998                      	out portc,r25
+0000b4 0fd1                      	add r29,r17
+0000b5 940c 00a5                 jmp hereWeGoAgain
                                  
                                  tryAgainBub:
-000086 e012                      	ldi r17,2
-000087 e0ff                      	ldi r31,15
-000088 b9b8                      	out portc,r27
-000089 135f                      	cpse r21,r31
-00008a 2f1b                      	mov r17,r27
-00008b b918                      	out portc,r17
+0000b7 135f                      	cpse r21,r31
+0000b8 0000                      	nop
+0000b9 50d1                      	subi r29,1
+0000ba e012                      	ldi r17,2
+0000bb e0ff                      	ldi r31,15
+0000bc b9b8                      	out portc,r27
+0000bd 135f                      	cpse r21,r31
+0000be 2f1b                      	mov r17,r27
+0000bf b918                      	out portc,r17
                                  
-00008c 940c 0047                 jmp diScore
+0000c0 940c 00a5                 jmp hereWeGoAgain
                                  
                                  getRegion:
                                  
                                  wat:
-00008e b1f6                      	in r31,pinc
-00008f fdf3                      	sbrc r31 ,3
-000090 940c 0094                 	jmp commence
-000092 940c 008e                 jmp wat
+0000c2 b1f6                      	in r31,pinc
+0000c3 fdf3                      	sbrc r31 ,3
+0000c4 940c 00c8                 	jmp commence
+0000c6 940c 00c2                 jmp wat
                                  
                                  commence:
-000094 2788                      	clr r24
+0000c8 2788                      	clr r24
                                  flerp:
-000095 e1c0                      	ldi r28, 0b00010000
-000096 e061                      	ldi r22,1
-000097 2711                      	clr r17
-000098 2755                      	clr r21
-000099 27aa                      	clr r26
+0000c9 e1c0                      	ldi r28, 0b00010000
+0000ca e061                      	ldi r22,1
+0000cb 2711                      	clr r17
+0000cc 2755                      	clr r21
+0000cd 27aa                      	clr r26
                                  
-00009a 2733                      	clr r19
-00009b b9cb                      	out portd, r28
-00009c 940e 003b                 	call display
-00009e b95b                      	out portd, r21
-00009f 9478                      sei
+0000ce 2733                      	clr r19
+0000cf b9cb                      	out portd, r28
+0000d0 940e 003c                 	call display
+0000d2 b95b                      	out portd, r21
+0000d3 9478                      sei
                                  
                                  timeLoop:
-0000a0 0000                      	nop
-0000a1 940c 00a0                 	jmp timeLoop
+0000d4 0000                      	nop
+0000d5 940c 00d4                 	jmp timeLoop
                                  
                                  valueObtained:
-0000a3 94f8                      	cli	
-0000a4 2755                      	clr r21
-0000a5 9526                      	lsr r18
-0000a6 952a                      	dec r18
-0000a7 2f52                      	mov r21, r18
+0000d7 94f8                      	cli	
+0000d8 2755                      	clr r21
+0000d9 9526                      	lsr r18
+0000da 952a                      	dec r18
+0000db 2f52                      	mov r21, r18
                                  
-0000a8 3085                      	cpi r24,5
-0000a9 f291                      	breq valObt
+0000dc 3085                      	cpi r24,5
+0000dd f211                      	breq valObt
                                  
                                  		;The following code hard codes for numbers 10-15
-0000aa 305a                      	cpi r21,0x0a
-0000ab f0c9                      breq ten
-0000ac 305b                      	cpi r21, 0x0b
-0000ad f0d1                      breq elev
-0000ae 305c                      	cpi r21, 0x0c
-0000af f0d9                      breq twelve
-0000b0 305d                      	cpi r21, 0x0d
-0000b1 f0e1                      breq thirt
-0000b2 305e                      	cpi r21,0x0e
-0000b3 f0e9                      breq fourt
-0000b4 305f                      	cpi r21,0x0f
-0000b5 f0f1                      breq fift
+0000de 305a                      	cpi r21,0x0a
+0000df f0c9                      breq ten
+0000e0 305b                      	cpi r21, 0x0b
+0000e1 f0d1                      breq elev
+0000e2 305c                      	cpi r21, 0x0c
+0000e3 f0d9                      breq twelve
+0000e4 305d                      	cpi r21, 0x0d
+0000e5 f0e1                      breq thirt
+0000e6 305e                      	cpi r21,0x0e
+0000e7 f0e9                      breq fourt
+0000e8 305f                      	cpi r21,0x0f
+0000e9 f0f1                      breq fift
                                  
                                  dis:
-0000b6 2733                      	clr r19
-0000b7 b938                      	out portc,r19
-0000b8 b955                      	out portb, r21
-0000b9 940c 0032                 jmp pickMode
+0000ea 2733                      	clr r19
+0000eb b938                      	out portc,r19
+0000ec b955                      	out portb, r21
+0000ed 940c 0032                 jmp pickMode
                                  
                                  
                                  counting:
-0000bb 9523                      	inc r18
-0000bc 9518                      reti
+0000ef 9523                      	inc r18
+0000f0 9518                      reti
                                  
                                  pulseInp:
-0000bd 30a0                      	cpi r26, 0
-0000be f721                      	brne valueObtained
-0000bf 940e 00c2                 	call setr26
-0000c1 9518                      reti
+0000f1 30a0                      	cpi r26, 0
+0000f2 f721                      	brne valueObtained
+0000f3 940e 00f6                 	call setr26
+0000f5 9518                      reti
                                  
                                  setr26:
-0000c2 2722                      	clr r18
-0000c3 e0a1                      	ldi r26, 1
-0000c4 9508                      ret
+0000f6 2722                      	clr r18
+0000f7 e0a1                      	ldi r26, 1
+0000f8 9508                      ret
                                  
                                  ten:
-0000c5 e150                      	ldi r21,0x10
-0000c6 940c 00b6                 jmp dis
+0000f9 e150                      	ldi r21,0x10
+0000fa 940c 00ea                 jmp dis
                                  elev:
-0000c8 e151                      	ldi r21,0x11
-0000c9 940c 00b6                 jmp dis
+0000fc e151                      	ldi r21,0x11
+0000fd 940c 00ea                 jmp dis
                                  twelve:
-0000cb e152                      	ldi r21,0x12
-0000cc 940c 00b6                 jmp dis
+0000ff e152                      	ldi r21,0x12
+000100 940c 00ea                 jmp dis
                                  thirt:
-0000ce e153                      	ldi r21,0x13
-0000cf 940c 00b6                 jmp dis
+000102 e153                      	ldi r21,0x13
+000103 940c 00ea                 jmp dis
                                  fourt:
-0000d1 e154                      	ldi r21,0x14
-0000d2 940c 00b6                 jmp dis
+000105 e154                      	ldi r21,0x14
+000106 940c 00ea                 jmp dis
                                  fift:
-0000d4 e155                      	ldi r21,0x15
-0000d5 940c 00b6                 jmp dis
+000108 e155                      	ldi r21,0x15
+000109 940c 00ea                 jmp dis
 
 
 RESOURCE USE INFORMATION
@@ -1242,37 +1290,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  33 r17:   6 r18:   5 r19:   6 r20:   0 
-r21:  20 r22:   4 r23:   3 r24:   3 r25:   2 r26:   3 r27:   3 r28:   2 
-r29:   2 r30:   2 r31:   4 
-Registers used: 15 out of 35 (42.9%)
+r13:   0 r14:   0 r15:   0 r16:  35 r17:   8 r18:   5 r19:   7 r20:   3 
+r21:  21 r22:   4 r23:   3 r24:   3 r25:   3 r26:   3 r27:   4 r28:   2 
+r29:  14 r30:   5 r31:   9 
+Registers used: 16 out of 35 (45.7%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   1 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   1 adiw  :   0 and   :   1 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :  13 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   4 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   3 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :  12 cls   :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :  16 brge  :   1 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   1 brmi  :   0 
+brne  :   6 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   5 cbi   :   0 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   1 cln   :   0 clr   :  16 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :  17 cpse  :   2 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :   4 jmp   :  31 
-ld    :   0 ldd   :   0 ldi   :  29 lds   :   0 lpm   :   0 lsl   :   0 
-lsr   :   1 mov   :   2 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   1 or    :   0 ori   :   0 out   :  15 pop   :   0 
+cpi   :  24 cpse  :   3 dec   :   2 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   5 inc   :   6 jmp   :  37 
+ld    :   0 ldd   :   0 ldi   :  32 lds   :   0 lpm   :   0 lsl   :   0 
+lsr   :   1 mov   :   3 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   1 nop   :   2 or    :   0 ori   :   0 out   :  19 pop   :   0 
 push  :   0 rcall :   0 ret   :   2 reti  :   2 rjmp  :   0 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
-sbiw  :   0 sbr   :   0 sbrc  :   3 sbrs  :   0 sec   :   0 seh   :   0 
+sbiw  :   0 sbr   :   0 sbrc  :   4 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   2 
-sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 22 out of 113 (19.5%)
+sub   :   0 subi  :   1 swap  :   0 tst   :   0 wdr   :   0 
+Instructions used: 27 out of 113 (23.9%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0001ae    374      0    374   32768   1.1%
+[.cseg] 0x000000 0x000216    478      0    478   32768   1.5%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

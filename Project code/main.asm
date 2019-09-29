@@ -30,10 +30,10 @@ start:
 	ldi r16,0b00000111
 	out ddrc,r16
 
-pickMode:
-	;clr r16
+pickMode:;In this mode the slide switch regulates what mode the program is in
 	in r16,pind
 	clr r21
+	clr r29
 	sbrc r16,5
 	jmp getRegion
 	jmp gameMode
@@ -57,8 +57,37 @@ loop0:
 brne loop0
 ret
 
+ten2:
+	ldi r29,0x10
+jmp backAgain
+elev2:
+	ldi r29,0x11
+jmp backAgain
+twelve2:
+	ldi r29,0x12
+jmp backAgain
+
 diScore:
-	ldi r29,0b00011001
+	cpi r29,0
+	brlt negative
+	cpi r29,0
+	brge positive
+positive:
+	out portc,r25
+
+	cpi r29,0x0a
+	breq ten2
+	cpi r29,0x0b
+	breq elev2
+	cpi r29,0x0c
+	breq twelve2
+
+	backAgain:
+	out portb,r29
+jmp pickMode
+negative: 
+	out portc,r27
+	neg r29
 	out portb,r29
 jmp pickMode
 
@@ -84,12 +113,18 @@ jmp here
 
 gameMode:
 wait:
+	in r16,pind
+	sbrc r16,5
+	jmp pickMode
 	in r30,pinc
 	sbrc r30, 3
 	jmp comm
 jmp wait
 
 comm:
+clr r30
+flip:
+	inc r30
 	ldi r24,5
 	ldi r25,0b00000001
 	ldi r27,0b00000100
@@ -97,7 +132,9 @@ comm:
 	in r16,tcnt0
 	ldi r17,0b00001111
 	and r16,r17
-	
+	dec r16
+	mov r31,r16
+
 cpi r16,0x0a
 	breq ten1
 cpi r16, 0x0b
@@ -112,31 +149,42 @@ cpi r16,0x0f
 	breq fift1
 
 here:
-ldi r16,2
-;clr r20
-;cli
-
-	;inc r20
+clr r20
+lerp:
+	inc r20
 	out portb,r16
 	ldi r19,19
 	call display
-	;cpi r20,4
-
-	;cpi r24,5
+	cpi r20,10
+brne lerp
 	jmp flerp;this is done to obtain a region
 
 valObt:
-cpse r21,r16
+cpse r21,r31
 	jmp tryAgainBub
 	jmp youGotIt
 
+hereWeGoAgain:
+	cpi r30,6
+	brne flip;this loops the code 6 times
+	call display
+	clr r31
+	out portc,r31
+	ldi r19,50
+	call display
+	jmp diScore
 jmp pickMode
 
 youGotIt:
+	ldi r17,2
 	out portc,r25
-jmp diScore
+	add r29,r17
+jmp hereWeGoAgain
 
 tryAgainBub:
+	cpse r21,r31
+	nop
+	subi r29,1
 	ldi r17,2
 	ldi r31,15
 	out portc,r27
@@ -144,7 +192,7 @@ tryAgainBub:
 	mov r17,r27
 	out portc,r17
 
-jmp diScore
+jmp hereWeGoAgain
 
 getRegion:
 
