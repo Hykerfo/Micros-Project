@@ -84,11 +84,31 @@ positive:
 
 	backAgain:
 	out portb,r29
+	clr r18
+	lop:
+	inc r18
+	clr r19
+	call display
+	cpi r18,8
+	brne lop
+
+	clr r19
+	out portb, r19
 jmp pickMode
 negative: 
 	out portc,r27
 	neg r29
 	out portb,r29
+	clr r18
+	pool:
+	inc r18
+	clr r19
+	call display
+	cpi r18,8
+	brne pool
+
+	clr r19
+	out portb,r19
 jmp pickMode
 
 ten1:
@@ -153,9 +173,9 @@ clr r20
 lerp:
 	inc r20
 	out portb,r16
-	ldi r19,19
+	ldi r19,20
 	call display
-	cpi r20,10
+	cpi r20,8
 brne lerp
 	jmp flerp;this is done to obtain a region
 

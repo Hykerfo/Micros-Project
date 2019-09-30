@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Mon Sep 30 00:32:41 2019
+AVRASM ver. 2.2.7  C:\Users\Hyla\Documents\University\Microprossessors\Project\Project code\Project code\main.asm Mon Sep 30 03:57:18 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -696,11 +696,11 @@ EQU  TWIaddr      00000030
 EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
 CSEG start        00000022
-CSEG pulseInp     000000f1
-CSEG counting     000000ef
+CSEG pulseInp     00000103
+CSEG counting     00000101
 CSEG pickMode     00000032
-CSEG getRegion    000000c2
-CSEG gameMode     00000076
+CSEG getRegion    000000d4
+CSEG gameMode     00000088
 CSEG display      0000003c
 CSEG loop0        0000003c
 CSEG loop         0000003e
@@ -710,33 +710,35 @@ CSEG backAgain    0000005c
 CSEG elev2        0000004b
 CSEG twelve2      0000004e
 CSEG diScore      00000051
-CSEG negative     0000005f
+CSEG negative     00000068
 CSEG positive     00000055
-CSEG ten1         00000064
-CSEG here         00000096
-CSEG elev1        00000067
-CSEG twelve1      0000006a
-CSEG thirt1       0000006d
-CSEG fourt1       00000070
-CSEG fift1        00000073
-CSEG wait         00000076
-CSEG comm         00000080
-CSEG flip         00000081
-CSEG lerp         00000097
-CSEG flerp        000000c9
-CSEG valObt       000000a0
-CSEG tryAgainBub  000000b7
-CSEG youGotIt     000000b2
-CSEG hereWeGoAgain 000000a5
-CSEG wat          000000c2
-CSEG commence     000000c8
-CSEG timeLoop     000000d4
-CSEG valueObtained 000000d7
-CSEG ten          000000f9
-CSEG elev         000000fc
-CSEG twelve       000000ff
-CSEG thirt        00000102
-CSEG fourt        00000105
-CSEG fift         00000108
-CSEG dis          000000ea
-CSEG setr26       000000f6
+CSEG lop          0000005e
+CSEG pool         0000006c
+CSEG ten1         00000076
+CSEG here         000000a8
+CSEG elev1        00000079
+CSEG twelve1      0000007c
+CSEG thirt1       0000007f
+CSEG fourt1       00000082
+CSEG fift1        00000085
+CSEG wait         00000088
+CSEG comm         00000092
+CSEG flip         00000093
+CSEG lerp         000000a9
+CSEG flerp        000000db
+CSEG valObt       000000b2
+CSEG tryAgainBub  000000c9
+CSEG youGotIt     000000c4
+CSEG hereWeGoAgain 000000b7
+CSEG wat          000000d4
+CSEG commence     000000da
+CSEG timeLoop     000000e6
+CSEG valueObtained 000000e9
+CSEG ten          0000010b
+CSEG elev         0000010e
+CSEG twelve       00000111
+CSEG thirt        00000114
+CSEG fourt        00000117
+CSEG fift         0000011a
+CSEG dis          000000fc
+CSEG setr26       00000108
